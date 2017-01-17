@@ -1,7 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import os
-from scipy import signal
 
 '''
     t : time sequence iterable
@@ -24,7 +22,7 @@ timestamps = (data[0] - data[0,0])/1000
 accel_data = data[1:4]
 gyro_data = data[4:-1]
 
-max_peaks = peak_detection(timestamps, accel_data[0])
+max_peaks = peak_detection(timestamps, accel_data[0],dt=120)
 
 plt.scatter(max_peaks[:,0], max_peaks[:,1], color = 'red')
 #plt.scatter(timestamps,accel_data[0],color = 'black')
