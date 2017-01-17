@@ -1,5 +1,5 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
 '''
     t : time sequence iterable
@@ -7,9 +7,9 @@ import matplotlib.pyplot as plt
     dt: neighboring data points
     thresh: threshold
 
-    idea:check elements from index current-dt to current+dt
+    idea:
+    check elements from index current-dt to current+dt
     if the current element is bigger than its neighbors and threshold, peak is detected
-    ** solution 1
 '''
 def peak_detection(t,sigs,dt=25,thresh=3):
     peaks = []
