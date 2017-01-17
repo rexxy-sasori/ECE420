@@ -1,23 +1,21 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+from scipy import signal
 
 '''
     t : time sequence iterable
-    sig: signal vector
+    sigs: signal vector
 '''
-def peak_detection(t,sigs):
+def peak_detection(t,sigs,dt=125):
     peaks = []
-    max_val = -np.Inf
-
-    for time,sig in zip(t,sigs):
-        if sig > max_val:
-            max_val = sig
-            position = time
-
-    peaks.append((position,max_val))
+    N = len(sigs)
+    for i in range(dt,N-dt-1):
+        left_neighbor = sigs[i-dt:i+1]
+        right_neighbor = sigs[i:i+dt+1]
+        if max(left_neighbor) == sigs[i] and max(right_neighbor) == sigs[i]:
+            peaks.append((t[i],sigs[i]))
     return np.array(peaks)
-
 
 csv_filename = 'sample_sensor_data.csv'
 data = np.genfromtxt(csv_filename,delimiter=',').T
@@ -27,7 +25,9 @@ accel_data = data[1:4]
 gyro_data = data[4:-1]
 
 max_peaks = peak_detection(timestamps, accel_data[0])
+
 plt.scatter(max_peaks[:,0], max_peaks[:,1], color = 'red')
+#plt.scatter(timestamps,accel_data[0],color = 'black')
 
 
 plt.plot(timestamps,accel_data[0])
