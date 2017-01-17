@@ -24,6 +24,7 @@ public class PedometerSimple extends AppCompatActivity {
 
     public TextView textStatus;
     private Button buttonStart;
+    private Button buttonStop;
 
     private SensorReader mSensorReader;
     private boolean sensorsOn;
@@ -41,6 +42,7 @@ public class PedometerSimple extends AppCompatActivity {
 
         textStatus = (TextView) findViewById(R.id.textStatus);
         buttonStart = (Button) findViewById(R.id.buttonStart);
+        buttonStop = (Button) findViewById(R.id.buttonStop);
 
 
         buttonStart.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +53,16 @@ public class PedometerSimple extends AppCompatActivity {
                     if (sensorsOn) {
                         textStatus.setText("Started!");
                     }
+                }
+            }
+        });
+
+        buttonStop.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                if(sensorsOn) {
+                    sensorsOn = false;
+                    mSensorReader.stopCollection();
+                    textStatus.setText("Stopped");
                 }
             }
         });
