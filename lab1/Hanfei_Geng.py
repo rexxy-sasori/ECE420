@@ -5,16 +5,22 @@ import matplotlib.pyplot as plt
     t : time sequence iterable
     sigs: signal vector
     dt: neighboring data points
-    thresh: threshhold
+    thresh: threshold
+
+    idea:check elements from index current-dt to current+dt
+    if the current element is bigger than its neighbors and threshold, peak is detected
+    ** solution 1
 '''
-def peak_detection(t,sigs,dt=125,thresh = 5 ):
+def peak_detection(t,sigs,dt=25,thresh=3):
     peaks = []
     N = len(sigs)
+
     for i in range(dt,N-dt-1):
         left_neighbor = sigs[i-dt:i+1]
         right_neighbor = sigs[i:i+dt+1]
         if max(left_neighbor) == sigs[i] and max(right_neighbor) == sigs[i] and sigs[i] >= thresh:
             peaks.append((t[i],sigs[i]))
+
     return np.array(peaks)
 
 csv_filename = 'sample_sensor_data.csv'
@@ -27,7 +33,7 @@ gyro_data = data[4:-1]
 '''
 nice combinations : dt = 25 threshold = 3
 '''
-max_peaks = peak_detection(timestamps, accel_data[0],dt = 25,thresh = 3)
+max_peaks = peak_detection(timestamps, accel_data[0])
 
 plt.scatter(max_peaks[:,0], max_peaks[:,1], color = 'red')
 #plt.scatter(timestamps,accel_data[0],color = 'black')
