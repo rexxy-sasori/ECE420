@@ -44,6 +44,7 @@ public class PedometerSimple extends AppCompatActivity {
         buttonStart = (Button) findViewById(R.id.buttonStart);
         buttonStop = (Button) findViewById(R.id.buttonStop);
 
+        /*add click event listener to buttonStart*/
 
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +58,7 @@ public class PedometerSimple extends AppCompatActivity {
             }
         });
 
+        /*add click event listener to buttonStop*/
         buttonStop.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 if(sensorsOn) {
