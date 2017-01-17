@@ -4,14 +4,16 @@ import matplotlib.pyplot as plt
 '''
     t : time sequence iterable
     sigs: signal vector
+    dt: neighboring data points
+    thresh: threshhold
 '''
-def peak_detection(t,sigs,dt=125):
+def peak_detection(t,sigs,dt=125,thresh = 5 ):
     peaks = []
     N = len(sigs)
     for i in range(dt,N-dt-1):
         left_neighbor = sigs[i-dt:i+1]
         right_neighbor = sigs[i:i+dt+1]
-        if max(left_neighbor) == sigs[i] and max(right_neighbor) == sigs[i]:
+        if max(left_neighbor) == sigs[i] and max(right_neighbor) == sigs[i] and sigs[i] >= thresh:
             peaks.append((t[i],sigs[i]))
     return np.array(peaks)
 
@@ -22,7 +24,10 @@ timestamps = (data[0] - data[0,0])/1000
 accel_data = data[1:4]
 gyro_data = data[4:-1]
 
-max_peaks = peak_detection(timestamps, accel_data[0],dt=130)
+'''
+nice combinations : dt = 25 threshold = 3
+'''
+max_peaks = peak_detection(timestamps, accel_data[0],dt = 25,thresh = 3)
 
 plt.scatter(max_peaks[:,0], max_peaks[:,1], color = 'red')
 #plt.scatter(timestamps,accel_data[0],color = 'black')
