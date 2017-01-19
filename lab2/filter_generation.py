@@ -1,10 +1,16 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 from scipy import signal
 
 # Your filter design here
 # firls() can be called via signal.firls()
 #b = ??
+
+sampling_freq = 48000  # Hz
+band = [900, 1000]  # Hz
+desired = [1, 0]
+
+b = signal.firls(73, bands=band, desired=desired, nyq=sampling_freq)
 
 # Signal analysis
 w, h = signal.freqz(b)

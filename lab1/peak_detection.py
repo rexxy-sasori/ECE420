@@ -10,6 +10,9 @@ import numpy as np
     idea:
     check elements from index current-dt to current+dt
     if the current element is bigger than its neighbors and threshold, peak is detected
+
+    dt and thresh are set to optimal combinations : dt = 25 threshold = 3
+
 '''
 def peak_detection(t,sigs,dt=25,thresh=3):
     peaks = []
@@ -30,14 +33,9 @@ timestamps = (data[0] - data[0,0])/1000
 accel_data = data[1:4]
 gyro_data = data[4:-1]
 
-'''
-nice combinations : dt = 25 threshold = 3
-'''
 max_peaks = peak_detection(timestamps, accel_data[0])
 
 plt.scatter(max_peaks[:,0], max_peaks[:,1], color = 'red')
-#plt.scatter(timestamps,accel_data[0],color = 'black')
-
 
 plt.plot(timestamps,accel_data[0])
 plt.xlabel('Time')

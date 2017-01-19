@@ -89,6 +89,7 @@ public class PedometerSimple extends AppCompatActivity {
             }
         });
 
+        //Asking Permission when running
         if (Build.VERSION.SDK_INT >= 23) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
