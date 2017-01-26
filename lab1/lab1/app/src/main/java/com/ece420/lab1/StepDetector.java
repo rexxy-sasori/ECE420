@@ -8,12 +8,12 @@ import java.util.List;
 public class StepDetector {
 
     /* Public vars */
-    public static final int N_SAMPLES = 50;
+    public static final int N_SAMPLES = 25;
     public float lastStepAccelVal;
 
     /* Parameters */
     private final long SEC_TO_MS = 1000;
-    private final float ACCEL_THRESHOLD = 5f;
+    private final float ACCEL_THRESHOLD = 2.5f;
     private final long MIN_TIME_BETWEEN_STEPS = Math.round(SEC_TO_MS * 0.2);
 
     /* State variables */
