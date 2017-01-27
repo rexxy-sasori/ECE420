@@ -62,21 +62,13 @@ def my_convolution(data, filter):
     M = len(b)
     out_put = [0 for i in range(N + M - 1)]
     left = 0
-    right = 0
+    right = M
 
     for i in range(len(out_put)):
-        if i >= M - 1 and i <= N - 1:
-            '''
-            if the filter is within the data
-            '''
-            left = 0
-            right = M
-
-        elif i < M - 1:
+        if i < M - 1:
             '''
             left out of range
             '''
-            left = 0
             right = i + 1
 
         elif i > N - 1:
@@ -84,7 +76,10 @@ def my_convolution(data, filter):
             right out of range
             '''
             left = i + 1 - N
-            right = M
+
+        '''
+        in the range
+        '''
         for j in range(left, right):
             out_put[i] = out_put[i] + test_data[i - j] * b[j]
 
@@ -93,8 +88,9 @@ def my_convolution(data, filter):
 
 out = my_convolution(data=test_data, filter=b)
 
+
 plt.plot(out, 'r')
 plt.figure()
-plt.plot(test_data)
+plt.plot(signal.convolve(test_data, b), "g")
 
 plt.show()
