@@ -58,24 +58,23 @@ test_data = signal.chirp(t, 1, t[-1], 24000, method='logarithmic')
 
 
 def my_convolution(data, filter):
-    N = len(test_data)
-    M = len(b)
-    out_put = [0 for i in range(N + M - 1)]
+    out_put = np.zeros(len(b) + len(test_data) - 1)
+
     left = 0
-    right = M
+    right = len(b)
 
     for i in range(len(out_put)):
-        if i < M - 1:
+        if i < len(b) - 1:
             '''
             left out of range
             '''
             right = i + 1
 
-        elif i > N - 1:
+        elif i > len(test_data) - 1:
             '''
             right out of range
             '''
-            left = i + 1 - N
+            left = i + 1 - len(test_data)
 
         '''
         in the range
@@ -83,7 +82,7 @@ def my_convolution(data, filter):
         for j in range(left, right):
             out_put[i] = out_put[i] + test_data[i - j] * b[j]
 
-    return out_put
+    return np.array(out_put)
 
 
 out = my_convolution(data=test_data, filter=b)
