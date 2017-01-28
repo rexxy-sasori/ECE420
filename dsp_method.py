@@ -6,9 +6,7 @@ upsample signal x by a factor of rate
 x ndarray input signal
 rate integer
 '''
-
-
-def upsampling(x, rate):
+def upsampling(x,up_factor):
     size = len(x)
 
     row = [0 for i in range(size)]
@@ -16,16 +14,13 @@ def upsampling(x, rate):
 
     return x
 
-
 '''
 downsample signal x by a factor of rate
 @para
 x ndarray input signal
 rate integer
 '''
-
-
-def downsampling(x, rate):
+def downsampling(x,down_factor):
     size = len(x)
 
     row = [0 for i in range(size)]
@@ -39,18 +34,34 @@ def downsampling(x, rate):
 
     return output
 
-
-def fftmy(x, pad):
+def dft(x,pad):
     return x
 
+def fft(x):
+    N = len(x)
+    if N % 2 == 1:
+        return dft(x)
 
+    else:
+        twiddle_factor = 1
+        even = x[0:N-2:2]
+        odd = x[1:N-1:2]
+        Xe = fft(x)
+        Xo = fft(x)
+        return [Xe,Xe] + twiddle_factor * [Xo,Xo]
+
+'''
+shuffle the input sequence so that fft can do both
+DIT  and DIF algorithm to do fft
+'''
 def shuffle(x):
     return x
-
 
 def fast_convol(data, filter):
     return a
 
-
 def block_add(data, filter, block):
     return a
+
+def ifft(x):
+    return x
