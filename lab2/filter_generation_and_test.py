@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy import signal
 
+
 # Your filter design here
 # firls() can be called via signal.firls()
 # b = ??
@@ -27,6 +28,7 @@ band = [0,
 desired = [1, 1, 0, 0, 1, 1]
 
 b = signal.firls(tap, band, desired, nyq=nyq)
+np.savetxt("fircoeffcients.csv", b)
 
 # Signal analysis
 w, h = signal.freqz(b)
@@ -51,6 +53,7 @@ plt.show()
 '''
 testing
 '''
+'''
 F_s = 48000
 t = [i / F_s for i in range(2 * F_s)]
 
@@ -65,20 +68,11 @@ def my_convolution(data, filter):
 
     for i in range(len(out_put)):
         if i < len(b) - 1:
-            '''
-            left out of range
-            '''
             right = i + 1
 
         elif i > len(test_data) - 1:
-            '''
-            right out of range
-            '''
             left = i + 1 - len(test_data)
 
-        '''
-        in the range
-        '''
         for j in range(left, right):
             out_put[i] = out_put[i] + test_data[i - j] * b[j]
 
@@ -93,3 +87,4 @@ plt.figure()
 plt.plot(signal.convolve(test_data, b), "g")
 
 plt.show()
+'''
