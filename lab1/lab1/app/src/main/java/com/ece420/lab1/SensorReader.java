@@ -44,7 +44,6 @@ public class SensorReader implements SensorEventListener {
 
     public SensorReader(Context context) {
         mContext = context;
-
         mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         mGyroscope = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
@@ -103,6 +102,7 @@ public class SensorReader implements SensorEventListener {
     }
 
     @Override
+
     public void onSensorChanged(SensorEvent event) {
         long timestamp = System.currentTimeMillis();
 
@@ -135,6 +135,7 @@ public class SensorReader implements SensorEventListener {
             ((PedometerSimple) mContext).accelGraphSteps.appendData(newVal, true, 100 * SAMPLE_RATE);
         }
     }
+
 
     private void writeToCsv(SensorEvent event) {
         String newLine = String.valueOf(System.currentTimeMillis()) + ", ";

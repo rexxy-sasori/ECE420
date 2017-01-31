@@ -20,14 +20,20 @@ import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 
+import java.net.InetAddress;
+
 public class PedometerSimple extends AppCompatActivity {
+
 
     public TextView textStatus;
     private Button buttonStart;
     private Button buttonStop;
 
     private SensorReader mSensorReader;
+
     private boolean sensorsOn;
+
+    private UDPListenerService udpListenerService;
 
     public LineGraphSeries<DataPoint> accelGraphData;
     public PointsGraphSeries<DataPoint> accelGraphSteps;
@@ -38,7 +44,8 @@ public class PedometerSimple extends AppCompatActivity {
         setContentView(R.layout.activity_pedometer_simple);
 
         sensorsOn = false;
-        mSensorReader = new SensorReader(this);
+        //mSensorReader = new SensorReader(this);
+        udpListenerService = new UDPListenerService();
 
         textStatus = (TextView) findViewById(R.id.textStatus);
         buttonStart = (Button) findViewById(R.id.buttonStart);
@@ -50,7 +57,9 @@ public class PedometerSimple extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!sensorsOn) {
-                    sensorsOn = mSensorReader.startCollection();
+                    //sensorsOn = mSensorReader.startCollection();
+                    udpListenerService.startListenForUDPBroadcast();
+                    sensorsOn = true;
                     if (sensorsOn) {
                         textStatus.setText("Started!");
                     }
@@ -63,7 +72,8 @@ public class PedometerSimple extends AppCompatActivity {
             public void onClick(View v){
                 if(sensorsOn) {
                     sensorsOn = false;
-                    mSensorReader.stopCollection();
+                    //mSensorReader.stopCollection();
+                    udpListenerService.stopListen();
                     textStatus.setText("Stopped");
                 }
             }
@@ -106,7 +116,8 @@ public class PedometerSimple extends AppCompatActivity {
         super.onResume();
 
         if (sensorsOn) {
-            mSensorReader.register();
+            //mSensorReader.register();
+            //udpListenerService.registerRe
         }
     }
 
@@ -115,7 +126,8 @@ public class PedometerSimple extends AppCompatActivity {
         super.onPause();
 
         if (sensorsOn) {
-            mSensorReader.unregister();
+            //mSensorReader.unregister();
+            //udpListenerService.unregisterReceiver();
         }
     }
 

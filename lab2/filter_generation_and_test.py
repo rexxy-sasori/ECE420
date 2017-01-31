@@ -28,7 +28,16 @@ band = [0,
 desired = [1, 1, 0, 0, 1, 1]
 
 b = signal.firls(tap, band, desired, nyq=nyq)
-np.savetxt("fircoeffcients.csv", b)
+#c++ convertion
+coef_str = "float coefs[] = {"
+
+for val in b:
+    coef_str += str(val) + ", "
+
+coef_str = coef_str[:-2]
+coef_str += "};"
+
+print(len(coef_str))
 
 # Signal analysis
 w, h = signal.freqz(b)
@@ -48,7 +57,11 @@ plt.ylabel('Angle (radians)', color='g')
 plt.grid()
 plt.axis('tight')
 plt.xlabel('Frequency [0 to Nyquist Hz, normalized]')
+plt.figure()
+plt.plot(b)
 plt.show()
+
+
 
 '''
 testing
