@@ -7,6 +7,8 @@
 #include <queue>
 #include <vector>
 #define FRAME_SIZE 128
+
+
 using namespace std;
 
 // TODO: Change this to match your filter
@@ -58,7 +60,7 @@ void ece420ProcessFrame(sample_buf *dataBuf) {
     // output:PCM 16 bit code
     for(int i = 0; i < dataBuf->size_;i+=2){
         //last 8 bits of the bufferOut
-        dataBuf->buf_[i] = (uint8_t)(bufferOut[i/2]&);
+        dataBuf->buf_[i] = (uint8_t)(bufferOut[i/2]&0x00FF);
         //first 8 bits of the bufferOut
         dataBuf->buf_[i+1] = (uint8_t)(bufferOut[i/2]>>8);
     }
@@ -70,22 +72,9 @@ void ece420ProcessFrame(sample_buf *dataBuf) {
 }
 
 
-vector<int16_t> circBuf(N_TAPS);
+//vector<int16_t> circBuf(N_TAPS);
+int16_t circBuf[N_TAPS] = {};
 int16_t circBufIdx = 0;
-
-int16_t elementMul(vector<double> & filter, vector<int16_t> & buffer){
-//    LOGD("%f", filter[0]);
-    int16_t result = 0;
-
-    for (int i = 0; i < N_TAPS; i++){
-        //@TO DO
-        result += filter[i]*buffer[i];
-    }
-
-    return result;
-}
-
-
 
 int16_t firFilter(int16_t sample) {
     int16_t output = 0;
@@ -142,16 +131,38 @@ int16_t firFilter(int16_t sample) {
     coefs[62]=-0.0172634363391; coefs[63]=-0.0180511257341;
     coefs[64]=-0.0179645741715; coefs[65]=-0.0170968842151;
     coefs[66]=-0.0155752887632;
-    for (int i = N_TAPS-2; i >= 0; i--) {
-        circBuf[i+1] = circBuf[i];
-    }
-    circBuf[0] = sample;
+
+    /*
+     * stick in sample at Mod(idx,N)
+     * update circIndex
+     * if == 67, reset to 0
+     * calculate the output
+     *
+    */
+
+    circBuf[circBufIdx % N_TAPS] = sample;
     circBufIdx++;
-    if (circBufIdx >= N_TAPS) {
-        output = elementMul(coefs, circBuf);
+
+    if(circBufIdx == 67){ circBufIdx = 0;}
+
+    int index;
+
+    for(int i = 0;i < N_TAPS;i++){
+        if(circBufIdx-1-i>=0){
+            //going left
+            index = circBufIdx-1-i;
+        }
+
+        else{
+            //right to the current above
+            index = circBufIdx-1-i+N_TAPS;
+        }
+
+        output += coefs[i] * circBuf[index];
     }
 
     // ********************* END YOUR CODE HERE *********************
+
 
     return output;
 }

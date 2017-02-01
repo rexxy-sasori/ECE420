@@ -11,10 +11,10 @@ from scipy import signal
 sampling_freq = 48000  # Hz
 nyq = sampling_freq / 2
 
-stopband_left_one = 975
-stopband_left_two = 1025
-stopband_right_one = 1975
-stopband_right_two = 2025
+stopband_left_one = 900
+stopband_left_two = 1100
+stopband_right_one = 1900
+stopband_right_two = 2100
 
 tap = 67
 
