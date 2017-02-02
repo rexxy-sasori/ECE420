@@ -8,6 +8,8 @@
 #include <vector>
 #define FRAME_SIZE 128
 
+#define IIR_B 9
+#define IIR_A 8
 
 using namespace std;
 
@@ -15,7 +17,8 @@ using namespace std;
 #define N_TAPS 67
 
 int16_t firFilter(int16_t sample);
-int16_t elementMul();
+int16_t iirFilter(int16_t sample);
+
 
 //read fir csv data file
 
@@ -48,8 +51,9 @@ void ece420ProcessFrame(sample_buf *dataBuf) {
     for (int sampleIdx = 0; sampleIdx < FRAME_SIZE; sampleIdx++) {
         int16_t sample = bufferIn[sampleIdx];
         // Your function implementation
-        int16_t output = firFilter(sample);
-        //int16_t output = sample;
+        int16_t output = firFilter(sample);//fir
+        //int16_t output = iirFilter(sample);//iir
+        //int16_t output = sample;//what comes in what goes out
         bufferOut[sampleIdx] = output;
     }
 
@@ -167,6 +171,93 @@ int16_t firFilter(int16_t sample) {
     return output;
 }
 
+/*
+ * iir filter using direct form I
+*/
+
+
+int16_t inputBuf[IIR_B] = {};
+int16_t inputIdx = 0;
+int16_t outputBuf[IIR_A] = {};
+int16_t outputIdx = -1;
+int16_t iirFilter(int16_t sample){
+    //IIR filter coefficients b and a
+    vector<double> coef_b(IIR_B);
+    coef_b = {0.786758431547,
+              -6.19913452948,
+              21.4639341433,
+              -42.6515743258,
+              53.2000332123,
+              -42.6515743258,
+              21.4639341433,
+              -6.19913452948,
+              0.786758431547};
+
+    vector<double> coef_a(IIR_A);
+    coef_a = {-7.40799518621,
+              24.1254032538,
+              -45.113091775,
+              52.9790027397,
+              -40.0113543239,
+              18.9780235358,
+              -5.16897642536,
+              0.618988832756};
+
+    int16_t output = 0;
+    int16_t forward = 0;
+    int16_t back = 0;
+
+    //********feed forward****************************
+    inputBuf[inputIdx % IIR_B] = sample;
+    inputIdx++;
+
+
+    if(inputIdx == IIR_B){inputIdx = 0;}
+
+    int interIdx;
+
+    for(int i = 0;i < IIR_B;i++){
+        if(inputIdx-1-i>=0){
+            //going left
+            interIdx = inputIdx-1-i;
+        }
+
+        else{
+            //right to the current above
+            interIdx = inputIdx-1-i+IIR_B;
+        }
+
+        forward += coef_b[i] * inputBuf[interIdx];
+    }
+
+    //****************Feedback************************
+
+    int index;
+    for(int i = 0;i < IIR_A; i++){
+        if(outputIdx-i>=0){
+            //going left
+            index = outputIdx-i;
+        }
+
+        else{
+            //right to the current above
+            index = outputIdx-i+IIR_A;
+        }
+
+        back -= coef_a[i] * outputBuf[index];
+    }
+
+    output = forward + back;
+    //store output into feedback
+    outputIdx++;
+    outputBuf[outputIdx%IIR_A] = output;
+    if(outputIdx == IIR_A){outputIdx = 0;}
+
+    return output;
+
+
+    //return forward;
+}
 
 
 

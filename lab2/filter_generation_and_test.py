@@ -66,7 +66,7 @@ plt.show()
 '''
 testing
 '''
-'''
+
 F_s = 48000
 t = [i / F_s for i in range(2 * F_s)]
 
@@ -100,4 +100,4 @@ plt.figure()
 plt.plot(signal.convolve(test_data, b), "g")
 
 plt.show()
-'''
+
