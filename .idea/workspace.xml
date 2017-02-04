@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="556da424-429e-46f2-9b0d-836c7f2f0038" name="Default" comment="updated lab2 test">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab2/filter_generation_and_test.py" afterPath="$PROJECT_DIR$/lab2/filter_generation_and_test.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab3/lab3/app/src/main/cpp/ece420_main.cpp" afterPath="$PROJECT_DIR$/lab3/lab3/app/src/main/cpp/ece420_main.cpp" />
-    </list>
+    <list default="true" id="556da424-429e-46f2-9b0d-836c7f2f0038" name="Default" comment="updated lab2 test" />
     <ignored path="ece420.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

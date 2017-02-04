@@ -61,7 +61,7 @@ void ece420ProcessFrame(sample_buf *dataBuf) {
 
         kiss_fft(cfg,cx_in,cx_out);//transform
 
-        fftOut[k] = pow((pow(cx_out[k].r,2) + pow(cx_out[k].i,2)),0.5)/SCALE;//writing transform to
+        fftOut[k] = (pow(cx_out[k].r,2) + pow(cx_out[k].i,2))/SCALE;//writing transform to
     }
 
     free(cfg);
