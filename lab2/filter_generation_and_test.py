@@ -31,7 +31,7 @@ b = signal.firls(tap, band, desired, nyq=nyq)
 #c++ convertion
 coef_str = "float coefs[] = {"
 
-for val in b:
+for val in signal.hamming():
     coef_str += str(val) + ", "
 
 coef_str = coef_str[:-2]

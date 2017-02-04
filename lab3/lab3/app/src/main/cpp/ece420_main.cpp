@@ -6,15 +6,18 @@
 #include "ece420_main.h"
 #include "ece420_lib.h"
 #include "kiss_fft/kiss_fft.h"
+#define SCALE 10
 
 float fftOut[FFT_SIZE] = {};
 bool isWritingFft = false;
+kiss_fft_cfg cfg = kiss_fft_alloc(FFT_SIZE,0,0,0);
 
 extern "C" {
 JNIEXPORT void JNICALL
 Java_com_ece420_lab3_MainActivity_getFftBuffer(JNIEnv *env, jclass, jobject bufferPtr);
 }
 
+float windowed_frame[FFT_SIZE] = {};
 void ece420ProcessFrame(sample_buf *dataBuf) {
     isWritingFft = true;
 
@@ -42,8 +45,26 @@ void ece420ProcessFrame(sample_buf *dataBuf) {
     //
     // Keep all of your code changes within java/MainActivity and cpp/ece420_*
 
+    //window operation and zero padding
+    for(int i = 0;i < FFT_SIZE;i++){
+        if(i<FRAME_SIZE){windowed_frame[i] = getHanningCoef(FRAME_SIZE,i) * dataFloat[i];}
+        else{windowed_frame[i] = 0;}
+    }
 
+    //************************performing fft*****************************
+    kiss_fft_cpx cx_in[FFT_SIZE] = {};
+    kiss_fft_cpx cx_out[FFT_SIZE] = {};
+    for(int k = 0;k < FFT_SIZE;k++){
+        //put ith sample in cx_in[i].r and cx_in[i].i
+        cx_in[k].r = windowed_frame[k];
+        cx_in[k].i = 0;
 
+        kiss_fft(cfg,cx_in,cx_out);//transform
+
+        fftOut[k] = pow((pow(cx_out[k].r,2) + pow(cx_out[k].i,2)),0.5)/SCALE;//writing transform to
+    }
+
+    free(cfg);
 
     // ********************* END YOUR CODE HERE *************************
 
