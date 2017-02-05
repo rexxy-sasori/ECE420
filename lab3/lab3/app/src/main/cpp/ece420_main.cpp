@@ -9,7 +9,7 @@
 #define SCALE 10
 #define PADDED FRAME_SIZE*2
 
-float fftOut[PADDED] = {};
+float fftOut[FRAME_SIZE] = {};
 bool isWritingFft = false;
 kiss_fft_cfg cfg = kiss_fft_alloc(PADDED,0,0,0);
 
@@ -65,10 +65,15 @@ void ece420ProcessFrame(sample_buf *dataBuf) {
         cx_out[k].r = zero;
         cx_out[k].i = zero;
 
-        kiss_fft(cfg,(kiss_fft_cpx*)cx_in,cx_out);//transform
-
-        fftOut[k] = log10((pow(cx_out[k].r,2) + pow(cx_out[k].i,2)))/SCALE;//writing transform to
     }
+
+    kiss_fft(cfg,(kiss_fft_cpx*)cx_in,cx_out);//transform
+
+
+    for(int k = 0;k<FRAME_SIZE;k++){
+        fftOut[k] = log10((pow(cx_out[k].r,2) + pow(cx_out[k].i,2)))/SCALE;
+    }
+
 
     free(cfg);
 
