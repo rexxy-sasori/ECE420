@@ -46,6 +46,9 @@ void ece420ProcessFrame(sample_buf *dataBuf) {
     //
     // Keep all of your code changes within java/MainActivity and cpp/ece420_*
 
+    kiss_fft_scalar zero;
+    memset(&zero,0,sizeof(zero));
+
     //window operation and zero padding
     for(int i = 0;i < PADDED;i++){
         if(i<FRAME_SIZE){windowed_frame[i] = getHanningCoef(FRAME_SIZE,i) * dataFloat[i];}
@@ -58,11 +61,13 @@ void ece420ProcessFrame(sample_buf *dataBuf) {
     for(int k = 0;k<PADDED;k++){
         //put ith sample in cx_in[i].r and cx_in[i].i
         cx_in[k].r = windowed_frame[k];
-        cx_in[k].i = 0;
+        cx_in[k].i = zero;
+        cx_out[k].r = zero;
+        cx_out[k].i = zero;
 
-        kiss_fft(cfg,cx_in,cx_out);//transform
+        kiss_fft(cfg,(kiss_fft_cpx*)cx_in,cx_out);//transform
 
-        fftOut[k] = log((pow(cx_out[k].r,2) + pow(cx_out[k].i,2)))/SCALE;//writing transform to
+        fftOut[k] = log10((pow(cx_out[k].r,2) + pow(cx_out[k].i,2)))/SCALE;//writing transform to
     }
 
     free(cfg);
