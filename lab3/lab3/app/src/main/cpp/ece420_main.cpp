@@ -6,12 +6,11 @@
 #include "ece420_main.h"
 #include "ece420_lib.h"
 #include "kiss_fft/kiss_fft.h"
-#define SCALE 10
+#define SCALE 15
 #define PADDED FRAME_SIZE*2
 
 float fftOut[FRAME_SIZE] = {};
 bool isWritingFft = false;
-kiss_fft_cfg cfg = kiss_fft_alloc(PADDED,0,0,0);
 
 extern "C" {
 JNIEXPORT void JNICALL
@@ -46,34 +45,32 @@ void ece420ProcessFrame(sample_buf *dataBuf) {
     //
     // Keep all of your code changes within java/MainActivity and cpp/ece420_*
 
+    kiss_fft_cfg cfg = kiss_fft_alloc(PADDED,0,NULL,NULL);
     kiss_fft_scalar zero;
     memset(&zero,0,sizeof(zero));
 
     //window operation and zero padding
     for(int i = 0;i < PADDED;i++){
-        if(i<FRAME_SIZE){windowed_frame[i] = getHanningCoef(FRAME_SIZE,i) * dataFloat[i];}
-        else{windowed_frame[i] = 0;}
+        if(i<FRAME_SIZE){windowed_frame[i] = (float) (0.54 - 0.46*cos(2.0 * M_PI * i / (FRAME_SIZE - 1))) * dataFloat[i];}
+        else{windowed_frame[i] = 0;}//padded result
     }
 
     //************************performing fft*****************************
     kiss_fft_cpx cx_in[PADDED] = {};
     kiss_fft_cpx cx_out[PADDED] = {};
     for(int k = 0;k<PADDED;k++){
-        //put ith sample in cx_in[i].r and cx_in[i].i
+        //put kth sample in cx_in[k].r and cx_in[k].i
         cx_in[k].r = windowed_frame[k];
         cx_in[k].i = zero;
         cx_out[k].r = zero;
         cx_out[k].i = zero;
-
     }
 
-    kiss_fft(cfg,(kiss_fft_cpx*)cx_in,cx_out);//transform
-
+    kiss_fft(cfg,cx_in,cx_out);//transform
 
     for(int k = 0;k<FRAME_SIZE;k++){
         fftOut[k] = log10((pow(cx_out[k].r,2) + pow(cx_out[k].i,2)))/SCALE;
     }
-
 
     free(cfg);
 
@@ -96,7 +93,8 @@ Java_com_ece420_lab3_MainActivity_getFftBuffer(JNIEnv *env, jclass, jobject buff
     // thread-safe, kinda
     while (isWritingFft) {}
 
-    for (int i = 0; i < PADDED; i++) {
+    for (int i = 0; i < FRAME_SIZE; i++) {
         buffer[i] = fftOut[i];
     }
 }
+
