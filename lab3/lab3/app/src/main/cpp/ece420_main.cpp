@@ -6,7 +6,7 @@
 #include "ece420_main.h"
 #include "ece420_lib.h"
 #include "kiss_fft/kiss_fft.h"
-#define SCALE 15
+#define SCALE 13
 #define PADDED FRAME_SIZE*2
 
 float fftOut[FRAME_SIZE] = {};
@@ -55,6 +55,7 @@ void ece420ProcessFrame(sample_buf *dataBuf) {
         else{windowed_frame[i] = 0;}//padded result
     }
 
+
     //************************performing fft*****************************
     kiss_fft_cpx cx_in[PADDED] = {};
     kiss_fft_cpx cx_out[PADDED] = {};
@@ -97,4 +98,4 @@ Java_com_ece420_lab3_MainActivity_getFftBuffer(JNIEnv *env, jclass, jobject buff
         buffer[i] = fftOut[i];
     }
 }
-
+

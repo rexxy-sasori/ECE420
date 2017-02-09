@@ -14,6 +14,7 @@ scale = 10
 def ece420ProcessFrame(frame):
     curFft = np.zeros(FFT_SIZE)
     window_frame = signal.hamming(FRAME_SIZE) * frame
+
     curFft = fft(window_frame,n = FFT_SIZE)
     curFft = curFft[0:int(FFT_SIZE/2)]
 

@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="556da424-429e-46f2-9b0d-836c7f2f0038" name="Default" comment="updated lab2 test">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab4/prelab4.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab3/lab3/.idea/misc.xml" afterPath="$PROJECT_DIR$/lab3/lab3/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab3/lab3/app/src/main/cpp/ece420_main.cpp" afterPath="$PROJECT_DIR$/lab3/lab3/app/src/main/cpp/ece420_main.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab3/lab3_student.py" afterPath="$PROJECT_DIR$/lab3/lab3_student.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab3/prelab3.ipynb" afterPath="$PROJECT_DIR$/lab3/prelab3.ipynb" />
     </list>
     <ignored path="ece420.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,8 +28,8 @@
       <file leaf-file-name="lab3_student.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lab3/lab3_student.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
-              <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+            <state relative-caret-position="432">
+              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -73,9 +74,9 @@
         <option value="$PROJECT_DIR$/lab2/lab2/app/src/main/cpp/ece420_main.cpp" />
         <option value="$PROJECT_DIR$/lab3/prelab3.ipynb" />
         <option value="$PROJECT_DIR$/lab2/iir_filter_testing.py" />
-        <option value="$PROJECT_DIR$/lab3/lab3_student.py" />
         <option value="$PROJECT_DIR$/lab2/filter_generation_and_test.py" />
         <option value="$PROJECT_DIR$/lab4/prelab4.ipynb" />
+        <option value="$PROJECT_DIR$/lab3/lab3_student.py" />
       </list>
     </option>
   </component>
@@ -108,6 +109,20 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="ECE420">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="ECE420">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="lab3">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -487,9 +502,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="81" y="30" width="1839" height="1050" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24654505" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24654505" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.49806523" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.57324487" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.47359645" order="7" side_tool="false" content_ui="tabs" />
@@ -903,8 +918,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lab3/lab3_student.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        <state relative-caret-position="432">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
