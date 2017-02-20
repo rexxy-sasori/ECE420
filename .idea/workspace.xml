@@ -2,29 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="556da424-429e-46f2-9b0d-836c7f2f0038" name="Default" comment="updated lab2 test">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab5/prelab5.ipynb" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lab4/lab4/.idea/encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lab5/lab5/.idea/encodings.xml" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lab5/lab5.ipynb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab3/lab3/.idea/misc.xml" afterPath="$PROJECT_DIR$/lab3/lab3/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab4/lab4/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/lab4/lab4/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab4/lab4/.idea/gradle.xml" afterPath="$PROJECT_DIR$/lab4/lab4/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab4/lab4/.idea/libraries/animated_vector_drawable_23_4_0.xml" afterPath="$PROJECT_DIR$/lab4/lab4/.idea/libraries/animated_vector_drawable_23_4_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab4/lab4/.idea/libraries/appcompat_v7_23_4_0.xml" afterPath="$PROJECT_DIR$/lab4/lab4/.idea/libraries/appcompat_v7_23_4_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab4/lab4/.idea/libraries/support_annotations_23_4_0.xml" afterPath="$PROJECT_DIR$/lab4/lab4/.idea/libraries/support_annotations_23_4_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab4/lab4/.idea/libraries/support_v4_23_4_0.xml" afterPath="$PROJECT_DIR$/lab4/lab4/.idea/libraries/support_v4_23_4_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab4/lab4/.idea/libraries/support_vector_drawable_23_4_0.xml" afterPath="$PROJECT_DIR$/lab4/lab4/.idea/libraries/support_vector_drawable_23_4_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab4/lab4/.idea/misc.xml" afterPath="$PROJECT_DIR$/lab4/lab4/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab4/lab4/app/src/main/cpp/ece420_main.cpp" afterPath="$PROJECT_DIR$/lab4/lab4/app/src/main/cpp/ece420_main.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab4/lab4_student.py" afterPath="$PROJECT_DIR$/lab4/lab4_student.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab5/lab5/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/lab5/lab5/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab5/lab5/.idea/gradle.xml" afterPath="$PROJECT_DIR$/lab5/lab5/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab5/lab5/.idea/libraries/animated_vector_drawable_23_4_0.xml" afterPath="$PROJECT_DIR$/lab5/lab5/.idea/libraries/animated_vector_drawable_23_4_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab5/lab5/.idea/libraries/appcompat_v7_23_4_0.xml" afterPath="$PROJECT_DIR$/lab5/lab5/.idea/libraries/appcompat_v7_23_4_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab5/lab5/.idea/libraries/support_annotations_23_4_0.xml" afterPath="$PROJECT_DIR$/lab5/lab5/.idea/libraries/support_annotations_23_4_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab5/lab5/.idea/libraries/support_v4_23_4_0.xml" afterPath="$PROJECT_DIR$/lab5/lab5/.idea/libraries/support_v4_23_4_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab5/lab5/.idea/libraries/support_vector_drawable_23_4_0.xml" afterPath="$PROJECT_DIR$/lab5/lab5/.idea/libraries/support_vector_drawable_23_4_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab5/lab5/.idea/misc.xml" afterPath="$PROJECT_DIR$/lab5/lab5/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab4/prelab4.ipynb" afterPath="$PROJECT_DIR$/lab4/prelab4.ipynb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lab5/lab5.py" afterPath="$PROJECT_DIR$/lab5/lab5.py" />
     </list>
     <ignored path="ece420.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="lab3_student.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lab3/lab3_student.py">
+      <file leaf-file-name="lab5.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lab5/lab5.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="9" column="10" lean-forward="false" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+            <state relative-caret-position="291">
+              <caret line="23" column="11" lean-forward="false" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -56,14 +37,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lab4_student.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lab4/lab4_student.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="17" column="16" lean-forward="false" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
+      <file leaf-file-name="lab5.ipynb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lab5/lab5.ipynb">
+          <provider selected="true" editor-type-id="ipnb-editor">
+            <state>
+              <selected id="0" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="prelab4.ipynb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lab4/prelab4.ipynb">
+          <provider selected="true" editor-type-id="ipnb-editor">
+            <state>
+              <selected id="-1" />
             </state>
           </provider>
         </entry>
@@ -72,17 +59,7 @@
         <entry file="file://$PROJECT_DIR$/lab5/prelab5.ipynb">
           <provider selected="true" editor-type-id="ipnb-editor">
             <state>
-              <selected id="-1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="lab5.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lab5/lab5.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-              <folding />
+              <selected id="1" />
             </state>
           </provider>
         </entry>
@@ -96,6 +73,11 @@
         <option value="Jupyter Notebook" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>find</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -129,6 +111,8 @@
         <option value="$PROJECT_DIR$/lab3/lab3_student.py" />
         <option value="$PROJECT_DIR$/lab5/prelab5.ipynb" />
         <option value="$PROJECT_DIR$/lab4/lab4_student.py" />
+        <option value="$PROJECT_DIR$/lab5/lab5.ipynb" />
+        <option value="$PROJECT_DIR$/lab5/lab5.py" />
       </list>
     </option>
   </component>
@@ -153,6 +137,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -165,9 +150,22 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="ECE420">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="lab5">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
       <pane id="Scratches" />
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
@@ -182,7 +180,7 @@
       <recent name="$PROJECT_DIR$/lab2/lab2" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.lab4_student">
+  <component name="RunManager" selected="Python.lab5">
     <configuration default="false" name="filter_generation" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -196,23 +194,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="ece420" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab2/filter_generation_and_test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lab2/lab2" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="ece420" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab2/lab2/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -264,6 +245,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="ece420" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab4/lab4_student.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="lab5" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lab5" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="ece420" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lab5/lab5.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -422,18 +420,18 @@
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python.peak_detection" />
       <item index="1" class="java.lang.String" itemvalue="Python.filter_generation" />
-      <item index="2" class="java.lang.String" itemvalue="Python.test" />
-      <item index="3" class="java.lang.String" itemvalue="Python.iir_filter_testing" />
-      <item index="4" class="java.lang.String" itemvalue="Python.lab3_student" />
-      <item index="5" class="java.lang.String" itemvalue="Python.lab4_student" />
+      <item index="2" class="java.lang.String" itemvalue="Python.iir_filter_testing" />
+      <item index="3" class="java.lang.String" itemvalue="Python.lab3_student" />
+      <item index="4" class="java.lang.String" itemvalue="Python.lab4_student" />
+      <item index="5" class="java.lang.String" itemvalue="Python.lab5" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.lab4_student" />
-        <item index="1" class="java.lang.String" itemvalue="Python.lab3_student" />
-        <item index="2" class="java.lang.String" itemvalue="Python.iir_filter_testing" />
-        <item index="3" class="java.lang.String" itemvalue="Python.filter_generation" />
-        <item index="4" class="java.lang.String" itemvalue="Python.test" />
+        <item index="0" class="java.lang.String" itemvalue="Python.lab5" />
+        <item index="1" class="java.lang.String" itemvalue="Python.lab4_student" />
+        <item index="2" class="java.lang.String" itemvalue="Python.lab3_student" />
+        <item index="3" class="java.lang.String" itemvalue="Python.iir_filter_testing" />
+        <item index="4" class="java.lang.String" itemvalue="Python.filter_generation" />
       </list>
     </recent_temporary>
   </component>
@@ -541,14 +539,16 @@
     <frame x="81" y="30" width="1839" height="1050" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23659481" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.49806523" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32857144" sideWeight="0.57324487" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23327805" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.49806523" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41428572" sideWeight="0.57048094" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.47359645" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32785088" sideWeight="0.4936429" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32747254" sideWeight="0.4936429" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2747253" sideWeight="0.42951906" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2498618" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.48479822" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30439562" sideWeight="0.43725815" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -558,13 +558,11 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40570176" sideWeight="0.44941956" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32747254" sideWeight="0.4267551" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -619,6 +617,9 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -626,18 +627,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="38" />
+      <option name="time" value="80" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lab2/Prelab2.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="-1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lab1/peak_detection.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -925,6 +919,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lab3/lab3_student.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="10" lean-forward="false" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab4/lab4_student.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lab4/prelab4.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -932,38 +940,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lab3/lab3_student.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="9" column="10" lean-forward="false" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lab4/lab4_student.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="17" column="16" lean-forward="false" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lab5/prelab5.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
-          <selected id="-1" />
+          <selected id="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab5/lab5.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lab5/lab5.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-          <folding />
+        <state relative-caret-position="291">
+          <caret line="23" column="11" lean-forward="false" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
