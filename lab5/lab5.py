@@ -21,7 +21,7 @@ N = len(audio_data)
 #plt.plot(audio_data)
 #plt.show()
 
-F_new = 500
+F_new = 441
 
 new_epoch_spacing = F_s / F_new
 audio_out = np.zeros(N)
@@ -47,6 +47,11 @@ for i in range(space,N-space,space):
     start_window = closest - p0
     end_window = closest + p0 + 1
     current_impulse = audio_data[start_window:end_window]
+
+    print("closest",closest,
+          "current new spacing",i,
+          "current p0",p0,
+          "current size",len(current_impulse))
 
     current_impulse = signal.triang(len(current_impulse)) * current_impulse
 

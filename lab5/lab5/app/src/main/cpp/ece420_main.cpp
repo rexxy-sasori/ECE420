@@ -16,6 +16,7 @@ int FREQ_NEW = 300;
 float bufferIn[BUFFER_SIZE] = {};
 float bufferOut[BUFFER_SIZE] = {};
 int newEpochIdx = FRAME_SIZE;
+//int newEpochIdx;
 
 
 bool lab5PitchShift(float *bufferIn) {
@@ -43,13 +44,36 @@ bool lab5PitchShift(float *bufferIn) {
         // findClosestInVector();
         // overlapAndAdd();
         // *********************** START YOUR CODE HERE  **************************** //
+        int p1 = F_S/FREQ_NEW;
+        int closestIdx = 0,closest;
+        int p0;
+        int start_window,end_window,start_accept,end_accept;
+
+
+        while(newEpochIdx < 2*FRAME_SIZE){
+            closestIdx = findClosestInVector(epochLocations,newEpochIdx,1,epochLocations.size()-1);
+            closest = epochLocations[closestIdx];
+
+            p0 = (epochLocations[closestIdx+1]-epochLocations[closestIdx-1])/2;
+            float currentImpulse[2*p0+1];
+            start_window = closest - p0;
+            start_accept = newEpochIdx - p0;
+
+            if(start_window < 0){
+                start_window = 0;
+            }
+
+            for(int i = 0;i < 2 * p0 + 1;i++){
+                currentImpulse[i] = bufferIn[start_window + i];
+                currentImpulse[i] = getHanningCoef(2*p0+1,i) * currentImpulse[i];
+            }
+
+            overlapAddArray(bufferOut,currentImpulse,start_accept,2*p0-1);
 
 
 
-
-
-
-
+            newEpochIdx += p1;
+        }
 
         // ************************ END YOUR CODE HERE  ***************************** //
     }
