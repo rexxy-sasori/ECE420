@@ -216,6 +216,57 @@ public class HistEq extends AppCompatActivity implements SurfaceHolder.Callback{
         return histeqdata;
     }
 
+
+    //conversion for data
+    // TODO: 2/24/17
+
+    private byte[][] oneDToTwoD(byte[] data,int width,int height){
+        byte[][] twoD = new byte[height][width];
+
+        return twoD;
+    }
+
+
+    // TODO: 2/24/17
+    private int[] twoDToOneD(byte[][] data){
+        int[] oneD = new int[data.length*data[0].length];
+
+        return oneD;
+    }
+    //**************************************************
+
+    //// TODO: 2/24/17
+    //reshaping kernel
+    private double[] twoDToOneDKernel(double[][] data){
+        double[] oneD = new double[data.length*data[0].length];
+
+
+
+        return oneD;
+    }
+
+    //// TODO: 2/24/17
+    private double[][] oneDToTwoDKernel(double[] data,int width,int height){
+        double[][] twoD = new double[height][width];
+
+        
+
+
+        return twoD;
+    }
+
+    //// TODO: 2/24/17
+    private double[] flip(double[] input){
+        double[] flipped = new double[input.length];
+
+        for(int i = 0;i < flipped.length;i++) {
+            flipped[i] = input[flipped.length - 1 - i];
+        }
+
+        return flipped;
+    }
+
+
     // Implement this Function. Notice the Returned type is int[] here
     public int[] conv2(byte[] data, int width, int height, double kernel[][]){
         // 0 is black and 255 is white.
@@ -223,12 +274,29 @@ public class HistEq extends AppCompatActivity implements SurfaceHolder.Callback{
         // Your output data goes here
         int[] convdata = new int[size];
 
+
         // Perform 2-D Convolution Here
         // Feel Free to modify this part, currently just copying the original Y channel to the output directly
-        for(int i=0;i<size;i++){
-            convdata[i] = (int)data[i];
-        }
+        byte[][] image,convimage = new byte[height][width];
+        double[] kernel_extend;
+        image = oneDToTwoD(data,width,height);
 
+        kernel_extend = twoDToOneDKernel(kernel);
+        kernel_extend = flip(kernel_extend);
+        kernel = oneDToTwoDKernel(kernel_extend,kernel[0].length,kernel.length);
+
+        for(int col = 1;col < width - 1;col++)
+            for(int row = 1;row < height - 1;row++)
+                for(int w = -1;w < 2;w++)
+                    for(int h = -1;h < 2;h++)
+                        convimage[col][row]
+                                += convimage[col+w][row+h] * kernel[1+w][1+h];
+
+
+
+
+
+        convdata = twoDToOneD(convimage);
         // We are converting to GrayScale so we don't need to copy U,V Channels here
 
         return convdata;
