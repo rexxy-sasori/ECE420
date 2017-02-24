@@ -13,7 +13,23 @@ def conv2(pic,kernel):
     pic_conv = numpy.zeros(numpy.shape(pic))
     # Perform 2-D Convolution with the given kernel
 
-    return pic_conv;
+    width,height,ch = pic.shape
+
+    kernel = numpy.reshape(kernel,[1,9])
+    kernel = kernel[::-1]
+    kernel = numpy.reshape(kernel,[3,3])
+
+    for c in range(0,ch):
+        for cidx in range(1,width-1):
+            for rowidx in range(1, height - 1):
+                for w in range(-1,2):
+                    for h in range(-1,2):
+                        pic_conv[cidx][rowidx][c] \
+                            += pic[cidx+w][rowidx+h][c] * kernel[1+w][1+h]
+
+
+
+    return pic_conv.astype("uint8");
 
 # Gaussian Kernel Following the Descriptiong: http://www.mathworks.com/help/images/ref/fspecial.html
 def gengaussian(size=5,sigma=3.0):
@@ -73,6 +89,8 @@ fig_kitten_blur = plt.figure(2);
 fig_kitten_blur.suptitle('Blurred Kitten.png', fontsize=14, fontweight='bold');
 plt.imshow(kitten_blur,vmin = 0, vmax = 255);
 plt.show(block=False);
+
+
 
 # Edge Detection Kernel
 # Read Image and Display
