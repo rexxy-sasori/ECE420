@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import java.io.IOException;
@@ -205,8 +206,37 @@ public class HistEq extends AppCompatActivity implements SurfaceHolder.Callback{
 
         // Perform Histogram Equalization Here
         // Feel Free to modify this part, currently just copying the original Y channel to the output directly
-        for(int i=0;i<size;i++){
-            histeqdata[i] = data[i];
+        int[] histogram = new int[256],scaled = new int[256];
+        int[] cdf = new int[histogram.length];
+        int min;
+
+        for(int i = 0;i < height;i++){
+            for(int j = 0;j < width;j++){
+                histogram[data[i * width + j] + 128] ++;
+            }
+        }
+
+        cdf[0] = histogram[0];
+        min = size;
+
+        for(int i = 1;i < cdf.length;i++){
+            cdf[i] = cdf[i-1] + histogram[i];
+            if(cdf[i] < min){
+                min = cdf[i];
+            }
+        }
+
+        for(int i = 0;i < scaled.length;i++){
+            int num = (cdf[i] - min) * (255);
+            int denom = size - 1;
+            scaled[i] = (int)(Math.round(1.0 * num/denom));
+        }
+
+        for(int i = 0;i < height;i++){
+            for(int j = 0;j < width;j++){
+                    histeqdata[i*width + j] = (byte)(scaled[data[i * width+j]+128]-128);
+                    //histeqdata[i*width + j] += 128;
+            }
         }
 
         // Don't modify this Part, copying U,V channel data.
@@ -223,13 +253,25 @@ public class HistEq extends AppCompatActivity implements SurfaceHolder.Callback{
     private byte[][] oneDToTwoD(byte[] data,int width,int height){
         byte[][] twoD = new byte[height][width];
 
+        for(int row = 0;row < height;row++) {
+            for (int col = 0; col < width; col++) {
+                twoD[row][col] = data[row * width + col];
+            }
+        }
+
         return twoD;
     }
 
 
     // TODO: 2/24/17
-    private int[] twoDToOneD(byte[][] data){
+    private int[] twoDToOneD(int[][] data){
         int[] oneD = new int[data.length*data[0].length];
+
+        for(int row = 0;row < data.length;row++) {
+            for (int col = 0; col < data[0].length; col++) {
+                oneD[row * data[0].length + col] = data[row][col];
+            }
+        }
 
         return oneD;
     }
@@ -240,7 +282,11 @@ public class HistEq extends AppCompatActivity implements SurfaceHolder.Callback{
     private double[] twoDToOneDKernel(double[][] data){
         double[] oneD = new double[data.length*data[0].length];
 
-
+        for(int row = 0;row < data.length;row++) {
+            for (int col = 0; col < data[0].length; col++) {
+                oneD[row * data[0].length + col] = data[row][col];
+            }
+        }
 
         return oneD;
     }
@@ -249,8 +295,11 @@ public class HistEq extends AppCompatActivity implements SurfaceHolder.Callback{
     private double[][] oneDToTwoDKernel(double[] data,int width,int height){
         double[][] twoD = new double[height][width];
 
-        
-
+        for(int row = 0;row < height;row++) {
+            for (int col = 0; col < width; col++) {
+                twoD[row][col] = data[row * width + col];
+            }
+        }
 
         return twoD;
     }
@@ -273,30 +322,40 @@ public class HistEq extends AppCompatActivity implements SurfaceHolder.Callback{
         int size = height*width;
         // Your output data goes here
         int[] convdata = new int[size];
+        double[] conv = new double[size];
 
 
         // Perform 2-D Convolution Here
         // Feel Free to modify this part, currently just copying the original Y channel to the output directly
-        byte[][] image,convimage = new byte[height][width];
+        byte[][] image;
+
+
         double[] kernel_extend;
+        double[][] kernelFlipp;
+
         image = oneDToTwoD(data,width,height);
 
         kernel_extend = twoDToOneDKernel(kernel);
         kernel_extend = flip(kernel_extend);
-        kernel = oneDToTwoDKernel(kernel_extend,kernel[0].length,kernel.length);
+        kernelFlipp = oneDToTwoDKernel(kernel_extend,3,3);
 
-        for(int col = 1;col < width - 1;col++)
-            for(int row = 1;row < height - 1;row++)
-                for(int w = -1;w < 2;w++)
-                    for(int h = -1;h < 2;h++)
-                        convimage[col][row]
-                                += convimage[col+w][row+h] * kernel[1+w][1+h];
+        int h_start = -1,w_start = -1,h_end = 2,w_end = 2;
 
 
+        for(int row = 0;row < height;row++){
+            for(int col = 0;col < width;col++){
+                for(int h = h_start;h < h_end;h++) {
+                    for (int w = w_start; w < w_end; w++) {
+                        if((row+h) >= 0 && (row+h) < height && (col+w) >= 0 && (col+w) < width)
+                            conv[row*width+col] += (image[row + h][col + w] * kernelFlipp[1 + h][1 + w]);
+                    }
+                }
+
+                convdata[row * width + col] = (int)(Math.round(conv[row*width+col]));
+            }
+        }
 
 
-
-        convdata = twoDToOneD(convimage);
         // We are converting to GrayScale so we don't need to copy U,V Channels here
 
         return convdata;

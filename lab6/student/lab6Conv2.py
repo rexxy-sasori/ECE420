@@ -13,20 +13,24 @@ def conv2(pic,kernel):
     pic_conv = numpy.zeros(numpy.shape(pic))
     # Perform 2-D Convolution with the given kernel
 
-    width,height,ch = pic.shape
+    row,column,ch = pic.shape
+    print(pic.shape)
 
-    kernel = numpy.reshape(kernel,[1,9])
+    kernel = numpy.reshape(kernel,[1,9]) 
     kernel = kernel[::-1]
     kernel = numpy.reshape(kernel,[3,3])
+    h_start = -1
+    h_end = 2
+    w_start = -1
+    w_end = 2;
 
     for c in range(0,ch):
-        for cidx in range(1,width-1):
-            for rowidx in range(1, height - 1):
-                for w in range(-1,2):
-                    for h in range(-1,2):
-                        pic_conv[cidx][rowidx][c] \
-                            += pic[cidx+w][rowidx+h][c] * kernel[1+w][1+h]
-
+        for cidx in range(1, column-1):
+            for rowidx in range(1,row-1):
+                for w in range(h_start,h_end):
+                    for h in range(w_start,w_end):
+                        pic_conv[rowidx][cidx][c] \
+                            += pic[rowidx+w][cidx+h][c] * kernel[1+w][1+h]
 
 
     return pic_conv.astype("uint8");
@@ -83,6 +87,7 @@ plt.show(block=False);
 # Generate Kernel
 kernel_blur = gengaussian(3);
 # Apply Convolution
+
 kitten_blur = conv2(kitten_origin,kernel_blur)
 # Display Results
 fig_kitten_blur = plt.figure(2);
@@ -100,15 +105,16 @@ fig_logo_origin.suptitle('Original Logo.png', fontsize=14, fontweight='bold');
 plt.imshow(logo_origin,vmin = 0, vmax = 255);
 plt.show(block=False);
 # X-Edge Detection
+kernel = numpy.array([[1,0,-1],[0,0,0],[1,0,-1]])
 kernel_xedge = genxkernel();
-logo_xedge = conv2(logo_origin,kernel_xedge)
+logo_xedge = conv2(logo_origin,kernel)
 fig_logo_xedge = plt.figure(4);
 fig_logo_xedge.suptitle('X-Edge Detected Logo.png', fontsize=14, fontweight='bold');
 plt.imshow(logo_xedge,vmin = 0, vmax = 255);
 plt.show(block=False);
 # Y-Edge Detection
 kernel_yedge = genykernel();
-logo_yedge = conv2(logo_origin,kernel_yedge)
+logo_yedge = conv2(logo_origin,kernel)
 fig_logo_yedge = plt.figure(5);
 fig_logo_yedge.suptitle('Y-Edge Detected Logo.png', fontsize=14, fontweight='bold');
 plt.imshow(logo_yedge,vmin = 0, vmax = 255);
