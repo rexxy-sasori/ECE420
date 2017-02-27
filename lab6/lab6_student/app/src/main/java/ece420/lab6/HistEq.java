@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import java.io.IOException;
@@ -212,7 +211,7 @@ public class HistEq extends AppCompatActivity implements SurfaceHolder.Callback{
 
         for(int i = 0;i < height;i++){
             for(int j = 0;j < width;j++){
-                histogram[data[i * width + j] + 128] ++;
+                histogram[data[i * width + j] & 0x00FF] ++;
             }
         }
 
@@ -234,8 +233,8 @@ public class HistEq extends AppCompatActivity implements SurfaceHolder.Callback{
 
         for(int i = 0;i < height;i++){
             for(int j = 0;j < width;j++){
-                    histeqdata[i*width + j] = (byte)(scaled[data[i * width+j]+128]-128);
-                    //histeqdata[i*width + j] += 128;
+                histeqdata[i*width + j] = (byte)((scaled[data[i * width+j] & 0x00FF]));
+
             }
         }
 
@@ -250,31 +249,18 @@ public class HistEq extends AppCompatActivity implements SurfaceHolder.Callback{
     //conversion for data
     // TODO: 2/24/17
 
-    private byte[][] oneDToTwoD(byte[] data,int width,int height){
-        byte[][] twoD = new byte[height][width];
+    private int[][] oneDToTwoD(byte[] data,int width,int height){
+        int[][] twoD = new int[height][width];
 
         for(int row = 0;row < height;row++) {
             for (int col = 0; col < width; col++) {
-                twoD[row][col] = data[row * width + col];
+                twoD[row][col] = 0x00FF & data[row * width + col];
             }
         }
 
         return twoD;
     }
 
-
-    // TODO: 2/24/17
-    private int[] twoDToOneD(int[][] data){
-        int[] oneD = new int[data.length*data[0].length];
-
-        for(int row = 0;row < data.length;row++) {
-            for (int col = 0; col < data[0].length; col++) {
-                oneD[row * data[0].length + col] = data[row][col];
-            }
-        }
-
-        return oneD;
-    }
     //**************************************************
 
     //// TODO: 2/24/17
@@ -327,7 +313,7 @@ public class HistEq extends AppCompatActivity implements SurfaceHolder.Callback{
 
         // Perform 2-D Convolution Here
         // Feel Free to modify this part, currently just copying the original Y channel to the output directly
-        byte[][] image;
+        int[][] image;
 
 
         double[] kernel_extend;
@@ -342,16 +328,21 @@ public class HistEq extends AppCompatActivity implements SurfaceHolder.Callback{
         int h_start = -1,w_start = -1,h_end = 2,w_end = 2;
 
 
-        for(int row = 0;row < height;row++){
-            for(int col = 0;col < width;col++){
+        for(int row = 1;row < height-1;row++){
+            for(int col = 1;col < width-1;col++){
                 for(int h = h_start;h < h_end;h++) {
                     for (int w = w_start; w < w_end; w++) {
-                        if((row+h) >= 0 && (row+h) < height && (col+w) >= 0 && (col+w) < width)
-                            conv[row*width+col] += (image[row + h][col + w] * kernelFlipp[1 + h][1 + w]);
+                        //if((row+h) >= 0 && (row+h) < height && (col+w) >= 0 && (col+w) < width)
+                        conv[row*width+col] += (image[row + h][col + w] * kernelFlipp[1 + h][1 + w]);
                     }
                 }
 
-                convdata[row * width + col] = (int)(Math.round(conv[row*width+col]));
+                if(conv[row*width+col] <= 255 && conv[row*width+col]>=0)
+                    convdata[row * width + col] = (int)(Math.round(conv[row*width+col]));
+                else if(conv[row*width + col] < 0)
+                    convdata[row *width + col] = 0;
+                else if(conv[row*width + col] > 255)
+                    convdata[row*width + col] = 255;
             }
         }
 
