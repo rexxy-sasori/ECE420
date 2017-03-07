@@ -11,90 +11,90 @@
     tools:context="ece420.lab7.MainActivity">
 
     <SurfaceView
+        android:id="@+id/surfaceCam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
+        android:layout_alignBottom="@+id/textViewHR"
         android:layout_alignParentEnd="true"
-        android:id="@+id/surfaceCam"
-        android:layout_toEndOf="@+id/textView2"
-        android:layout_alignBottom="@+id/textViewHR" />
+        android:layout_below="@+id/textView1"
+        android:layout_toEndOf="@+id/textView2" />
 
     <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/buttonMain"
-        android:layout_marginTop="35dp"
-        android:layout_marginStart="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/textView1"
-        android:layout_alignParentStart="true" />
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="35dp"
+        android:text="Button" />
 
     <TextView
-        android:text="Camera Preview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/textView1"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:layout_marginStart="147dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/surfaceCam" />
+        android:layout_alignStart="@+id/surfaceCam"
+        android:layout_marginStart="147dp"
+        android:text="Camera Preview"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <TextView
-        android:text="(BPM)"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/textView3"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_below="@+id/textView2"
-        android:layout_alignEnd="@+id/buttonMain" />
-
-    <TextView
-        android:text="--"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/buttonMain"
+        android:layout_below="@+id/textView2"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="15dp"
+        android:text="(BPM)"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+    <TextView
         android:id="@+id/textViewHR"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:layout_marginTop="25dp"
-        android:layout_marginStart="22dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView3"
         android:layout_below="@+id/textView3"
-        android:layout_alignStart="@+id/textView3" />
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="25dp"
+        android:text="--"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <SurfaceView
+        android:id="@+id/surfaceRect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
+        android:layout_alignBottom="@+id/surfaceCam"
         android:layout_alignParentEnd="true"
-        android:id="@+id/surfaceRect"
-        android:layout_toEndOf="@+id/textView2"
-        android:layout_alignBottom="@+id/surfaceCam" />
+        android:layout_below="@+id/textView1"
+        android:layout_toEndOf="@+id/textView2" />
 
     <TextView
-        android:text="Heart Rate  "
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:layout_marginTop="94dp"
+        android:layout_alignStart="@+id/buttonMain"
         android:layout_below="@+id/buttonMain"
-        android:layout_alignStart="@+id/buttonMain" />
+        android:layout_marginTop="94dp"
+        android:text="Heart Rate  "
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <view
-        android:layout_width="wrap_content"
-        class="com.jjoe64.graphview.GraphView"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
         android:id="@+id/viewF"
-        android:layout_height="220dp" />
+        class="com.jjoe64.graphview.GraphView"
+        android:layout_width="wrap_content"
+        android:layout_height="220dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
     <view
-        android:layout_width="wrap_content"
-        class="com.jjoe64.graphview.GraphView"
         android:id="@+id/viewO"
+        class="com.jjoe64.graphview.GraphView"
+        android:layout_width="wrap_content"
         android:layout_height="220dip"
-        android:layout_marginBottom="16dp"
         android:layout_above="@+id/viewF"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="16dp" />
 
 </RelativeLayout>

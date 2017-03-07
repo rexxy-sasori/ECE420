@@ -8,36 +8,38 @@ from scipy import signal
 # b = ??
 
 # goal stopband down : -20dB
-sampling_freq = 48000  # Hz
+sampling_freq = 5000  # Hz
 nyq = sampling_freq / 2
 
-stopband_left_one = 900
-stopband_left_two = 1100
-stopband_right_one = 1900
-stopband_right_two = 2100
+stopband_left_one = 50
+stopband_left_two = 150
+stopband_right_one = 650
+stopband_right_two = 750
 
-tap = 67
+tap = 103
 
 band = [0,
         stopband_left_one,
         stopband_left_two,
         stopband_right_one,
         stopband_right_two,
-        24000]
+        nyq]
 
-desired = [1, 1, 0, 0, 1, 1]
+desired = [0, 0, 1, 1, 0, 0]
 
 b = signal.firls(tap, band, desired, nyq=nyq)
+
 #c++ convertion
 coef_str = "float coefs[] = {"
 
-for val in signal.hamming():
+for val in b:
     coef_str += str(val) + ", "
 
 coef_str = coef_str[:-2]
 coef_str += "};"
 
-print(len(coef_str))
+print((coef_str))
+
 
 # Signal analysis
 w, h = signal.freqz(b)

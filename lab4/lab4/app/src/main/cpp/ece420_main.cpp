@@ -96,6 +96,7 @@ void ece420ProcessFrame(sample_buf *dataBuf) {
         float Fs = 48000;
 
         lastFreqDetected = Fs/L;
+        LOGD("Frequency detected %lf",lastFreqDetected);
 
 
         free(cfg);

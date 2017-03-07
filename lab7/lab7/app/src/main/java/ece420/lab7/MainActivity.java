@@ -1,26 +1,22 @@
 package ece420.lab7;
 
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.app.ActivityCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.os.Bundle;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.PixelFormat;
+import android.graphics.Rect;
 import android.hardware.Camera;
+import android.hardware.Camera.PreviewCallback;
+import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.SurfaceHolder.Callback;
-import java.io.IOException;
-import android.graphics.Canvas;
-import android.hardware.Camera.PreviewCallback;
-import android.graphics.Rect;
-import java.util.Vector;     //imports vector utility
-
-
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -31,29 +27,34 @@ import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 
+import java.io.IOException;
+import java.util.Vector;
+
 public class MainActivity extends AppCompatActivity {
 
-    private Camera camera;
-    private SurfaceView surfaceView,transparentView;
-    private SurfaceHolder surfaceHolder,holderTransparent;
-    boolean previewing = false;
-    boolean started = false;
-    private TextView textHR;
-    private Button buttonmain;
+    private final int winsize = 50;
     // For Plotting The Data
     public LineGraphSeries<DataPoint> redlevelData;
     public LineGraphSeries<DataPoint> filteredData;
     public PointsGraphSeries<DataPoint> peakData;
-    private int dataIdx = 0;
-    // Camera Parameters and Window Size
-    private int width = 640;
-    private int height = 480;
-    private final int winsize = 50;
     // Don't Modify Anything Above, Feel Free to Modify Anything below
     // Do whatever you want witht filter part, below is just an example
     public int len = 51;
     public Vector<Double> rawbuffer = new Vector<Double>(len);
     public Vector<Double> filbuffer = new Vector<Double>(len);
+    boolean previewing = false;
+    boolean started = false;
+    long peakTime = 0;
+    double alpha = 0.8;
+    private Camera camera;
+    private SurfaceView surfaceView, transparentView;
+    private SurfaceHolder surfaceHolder, holderTransparent;
+    private TextView textHR;
+    private Button buttonmain;
+    private int dataIdx = 0;
+    // Camera Parameters and Window Size
+    private int width = 640;
+    private int height = 480;
     //private double coefs[]
     private double coefs[] = {
             0.00760817104843,
@@ -110,28 +111,27 @@ public class MainActivity extends AppCompatActivity {
     // Declare Your variables for calculating heart rate here
     // Time Variables
     private int peakNum = 30;
-    long peakTime = 0;
-    private long prevpeakTime = 0;
+    private long prevpeakTime = System.currentTimeMillis();
     // Mean Recording
     //private
     //private m
     private long k = 0;
-    double alpha = 0.8;
     private double prevMean = peakTime;
     private double newMean = 0;
     private double runningMean = 0;
     private double prevrunningMean = 0;
     private long timeInterval = 0;
-
-
+    // Implement this Function: Calculate Heart Rate
+    private double threshold = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, 1);}
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
+        }
 
         textHR = (TextView) findViewById(R.id.textViewHR);
         textHR.setText("--");
@@ -148,23 +148,23 @@ public class MainActivity extends AppCompatActivity {
 
                     // If you want to Initialize anything when you hit button, put them here.
 
+
                     // This part below is just to keep the app running
                     rawbuffer = new Vector<Double>(len);
                     filbuffer = new Vector<Double>(len);
-                    for(int i=0;i<len;i++){
+                    for (int i = 0; i < len; i++) {
                         rawbuffer.add(0.0);
                         filbuffer.add(0.0);
                     }
 
-                }
-                else{
+                } else {
                     started = false;
                     buttonmain.setText("start");
                 }
             }
         });
 
-        surfaceView = (SurfaceView)findViewById(R.id.surfaceCam);
+        surfaceView = (SurfaceView) findViewById(R.id.surfaceCam);
         surfaceHolder = surfaceView.getHolder();
         surfaceHolder.addCallback(new Callback() {
             @Override
@@ -177,39 +177,38 @@ public class MainActivity extends AppCompatActivity {
             public void surfaceCreated(SurfaceHolder holder) {
 
                 // TODO Auto-generated method stub
-                if(!previewing) {
+                if (!previewing) {
                     camera = Camera.open(1);
                     if (camera != null) {
                         try {
                             Camera.Parameters parameters = camera.getParameters();
-                            parameters.setPreviewSize(width,height);
+                            parameters.setPreviewSize(width, height);
                             camera.setParameters(parameters);
                             camera.setDisplayOrientation(90);
                             camera.setPreviewDisplay(surfaceHolder);
                             camera.setPreviewCallback(new PreviewCallback() {
-                                public void onPreviewFrame(byte[] data, Camera camera)
-                                {
+                                public void onPreviewFrame(byte[] data, Camera camera) {
 
                                     // redlevel is the mean value from current frame
                                     double redlevel = calcRedMean(data);
                                     DataPoint newVal = new DataPoint(dataIdx, redlevel);
                                     redlevelData.appendData(newVal, true, 100);
 
-                                    if(started){
+                                    if (started) {
                                         // We call your function here
                                         int result = calcHeartRate(redlevel);
                                         // Remember to modify the part below
                                         // We Plot the filtered data using the last element inside filbuffer vector
-                                        newVal = new DataPoint(dataIdx, filbuffer.get(len-1));
+                                        newVal = new DataPoint(dataIdx, filbuffer.get(len - 1));
                                         filteredData.appendData(newVal, true, 100);
                                         // We Plot the peaks marker using the second last element inside filbuffer vector
-                                        if(result==1){
-                                            DataPoint pVal = new DataPoint(dataIdx-1, filbuffer.get(len-2));
+                                        if (result == 1) {
+                                            DataPoint pVal = new DataPoint(dataIdx - 1, filbuffer.get(len - 2));
                                             peakData.appendData(pVal, true, 20);
                                         }
                                     }
                                     // We update our own plotting index, don't Modify this
-                                    dataIdx ++;
+                                    dataIdx++;
                                 }
                             });
                             camera.startPreview();
@@ -234,27 +233,29 @@ public class MainActivity extends AppCompatActivity {
         });
         surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
-        transparentView = (SurfaceView)findViewById(R.id.surfaceRect);
+        transparentView = (SurfaceView) findViewById(R.id.surfaceRect);
         holderTransparent = transparentView.getHolder();
         holderTransparent.addCallback(new Callback() {
-        @Override
-        public void surfaceChanged(SurfaceHolder holder, int format, int width,int height) {
-        }
-        @Override
-        public void surfaceCreated(SurfaceHolder holder) {
-            Canvas canvas = holderTransparent.lockCanvas(null);
-            Paint  paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            paint.setStyle(Paint.Style.STROKE);
-            paint.setColor(Color.CYAN);
-            paint.setStrokeWidth(5);
-            Rect rec=new Rect((canvas.getWidth()*(320-winsize)/640),(canvas.getHeight()*(240-winsize)/480),(canvas.getWidth()*(320+winsize)/640),(canvas.getHeight()*(240+winsize)/480));
-            canvas.drawRect(rec,paint);
-            holderTransparent.unlockCanvasAndPost(canvas);                                           // ´ò¿ªÉãÏñÍ·
-        }
-        @Override
-        public void surfaceDestroyed(SurfaceHolder holder) {
-        }
-    });
+            @Override
+            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+            }
+
+            @Override
+            public void surfaceCreated(SurfaceHolder holder) {
+                Canvas canvas = holderTransparent.lockCanvas(null);
+                Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+                paint.setStyle(Paint.Style.STROKE);
+                paint.setColor(Color.CYAN);
+                paint.setStrokeWidth(5);
+                Rect rec = new Rect((canvas.getWidth() * (320 - winsize) / 640), (canvas.getHeight() * (240 - winsize) / 480), (canvas.getWidth() * (320 + winsize) / 640), (canvas.getHeight() * (240 + winsize) / 480));
+                canvas.drawRect(rec, paint);
+                holderTransparent.unlockCanvasAndPost(canvas);                                           // ´ò¿ªÉãÏñÍ·
+            }
+
+            @Override
+            public void surfaceDestroyed(SurfaceHolder holder) {
+            }
+        });
         holderTransparent.setFormat(PixelFormat.TRANSLUCENT);
         transparentView.setZOrderMediaOverlay(true);
 
@@ -279,55 +280,53 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void draw(Canvas canvas, Paint paint, float x, float y, DataPointInterface dataPoint) {
                 paint.setStrokeWidth(8);
-                canvas.drawLine(x-15, y-15, x+15, y+15, paint);
-                canvas.drawLine(x+15, y-15, x-15, y+15, paint);
+                canvas.drawLine(x - 15, y - 15, x + 15, y + 15, paint);
+                canvas.drawLine(x + 15, y - 15, x - 15, y + 15, paint);
             }
         });
     }
 
     // Calculate Red Mean Value from YUV
-    public double calcRedMean(byte[] data){
+    public double calcRedMean(byte[] data) {
         final int frameSize = width * height;
         double redlevel = 0;
 
         for (int j = 0, yp = 0; j < height; j++) {
             int uvp = frameSize + (j >> 1) * width, u = 0, v = 0;
             for (int i = 0; i < width; i++, yp++) {
-                if(j>(240-winsize) && j<= (240+winsize) && i>=(320-winsize) && i<=(320+winsize)){
-                int y = (0xff & ((int) data[yp])) - 16;
-                if (y < 0)
-                    y = 0;
-                if ((i & 1) == 0) {
-                    v = (0xff & data[uvp++]) - 128;
-                    u = (0xff & data[uvp++]) - 128;
-                }
+                if (j > (240 - winsize) && j <= (240 + winsize) && i >= (320 - winsize) && i <= (320 + winsize)) {
+                    int y = (0xff & ((int) data[yp])) - 16;
+                    if (y < 0)
+                        y = 0;
+                    if ((i & 1) == 0) {
+                        v = (0xff & data[uvp++]) - 128;
+                        u = (0xff & data[uvp++]) - 128;
+                    }
 
-                int y1192 = 1192 * y;
-                int r = (y1192 + 1634 * v);
-                //int g = (y1192 - 833 * v - 400 * u);
-                //int b = (y1192 + 2066 * u);
+                    int y1192 = 1192 * y;
+                    int r = (y1192 + 1634 * v);
+                    //int g = (y1192 - 833 * v - 400 * u);
+                    //int b = (y1192 + 2066 * u);
 
-                if (r < 0)                  r = 0;
-                else if (r > 262143)       r = 262143;
-                //if (g < 0)                  g = 0;
-                //else if (g > 262143)       g = 262143;
-                //if (b < 0)                  b = 0;
-                //else if (b > 262143)        b = 262143;
+                    if (r < 0) r = 0;
+                    else if (r > 262143) r = 262143;
+                    //if (g < 0)                  g = 0;
+                    //else if (g > 262143)       g = 262143;
+                    //if (b < 0)                  b = 0;
+                    //else if (b > 262143)        b = 262143;
 
-                //rgb[yp] = 0xff000000 | ((r << 6) & 0xff0000) | ((g >> 2) & 0xff00) | ((b >> 10) & 0xff);
-                // Calculate the area with in height 240-50:240+50, width 320-50:320+50
-                 redlevel += (double)((((r << 6) & 0xff0000)>>16) & 0x00ff);
+                    //rgb[yp] = 0xff000000 | ((r << 6) & 0xff0000) | ((g >> 2) & 0xff00) | ((b >> 10) & 0xff);
+                    // Calculate the area with in height 240-50:240+50, width 320-50:320+50
+                    redlevel += (double) ((((r << 6) & 0xff0000) >> 16) & 0x00ff);
                 }
             }
         }
-        return redlevel/((winsize*2+1)*(winsize*2+1));
+        return redlevel / ((winsize * 2 + 1) * (winsize * 2 + 1));
     }
 
-    // Implement this Function: Calculate Heart Rate
-    private double threshold = 100;
-    public int calcHeartRate(double redmean){
+    public int calcHeartRate(double redmean) {
         //if(redmean < threshold)
-           // return ;
+        // return ;
 
         // Feel Free to Modify anything below
         // The current code is just to keep this app running
@@ -339,26 +338,27 @@ public class MainActivity extends AppCompatActivity {
         rawbuffer.add(redmean);
 
         filbuffer.remove(0);
-        filbuffer.add(firFilter(rawbuffer));
+        filbuffer.add(firFilter(rawbuffer) + 50);
 
-        if(filbuffer.get(filbuffer.size()-2)>filbuffer.get(filbuffer.size()-1)
-                && filbuffer.get(filbuffer.size()-2) > filbuffer.get(filbuffer.size()-3)){
+        if (filbuffer.get(filbuffer.size() - 2) > filbuffer.get(filbuffer.size() - 1)
+                && filbuffer.get(filbuffer.size() - 2) > filbuffer.get(filbuffer.size() - 3)) {
             anypeak = 1;
             peakTime = System.currentTimeMillis();
-            timeInterval = peakTime-prevpeakTime;
+            timeInterval = peakTime - prevpeakTime;
+            prevpeakTime = peakTime;
 
-            newMean = (prevMean * k + timeInterval)/(k+1);
+            newMean = alpha * prevMean + (1 - alpha) * (1.0 * timeInterval / 1000);
             prevMean = newMean;
-            if(k < Long.MAX_VALUE)
-                k++;
-            runningMean = prevrunningMean * alpha + (1-alpha) * timeInterval;
-            Log.d("",""+runningMean+" "+timeInterval+" "+peakTime);
+//            if(k < Long.MAX_VALUE)
+//                k++;
+//            newMean = prevMean * alpha + (1-alpha) * timeInterval;
+
 
         }
 
+        Log.d("", "" + runningMean + " " + timeInterval + " " + peakTime);
 
-
-        textHR.setText(""+(int)(60/runningMean));
+        textHR.setText("" + (int) (60 / newMean));
 
         // Return 0 for no peak found; Return 1 for peak found
         return anypeak;
@@ -368,8 +368,8 @@ public class MainActivity extends AppCompatActivity {
     private double firFilter(Vector<Double> buf) {
         double output = 0;
 
-        for(int i = 0;i < buf.size();i++){
-            output += coefs[i] * buf.get(buf.size()-1-i);
+        for (int i = 0; i < buf.size(); i++) {
+            output += coefs[i] * buf.get(buf.size() - 1 - i);
         }
 
         return output;
