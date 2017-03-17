@@ -120,3 +120,5 @@ Java_com_ece420_lab4_MainActivity_getFreqUpdate(JNIEnv *env, jclass) {
 
 
 
+
+
